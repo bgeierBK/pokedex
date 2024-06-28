@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-function Search({ onSearch }) {
+function Search({ onSearch, onTypeFilter, types }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedType, setSelectedType] = useState('all');
 
   const handleSearchChange = event => {
     const term = event.target.value;
@@ -10,13 +11,33 @@ function Search({ onSearch }) {
     onSearch(term);
   };
 
+  const handleTypeChange = event => {
+    const type = event.target.value;
+    setSelectedType(type);
+    onTypeFilter(type);
+  };
+
   return (
-    <input
-      type="text"
-      placeholder="Search Pokemon by Name"
-      value={searchTerm}
-      onChange={handleSearchChange}
-    />
+    <div>
+      <input
+        type="text"
+        placeholder="Search Pokemon by Name"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      <select
+        value={selectedType}
+        onChange={handleTypeChange}
+        className="type-filter"
+      >
+        <option value="all">All Types</option>
+        {types.map((type, index) => (
+          <option key={index} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 

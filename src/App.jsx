@@ -6,9 +6,8 @@ import Search from './search.jsx';
 function App() {
   const [pokemon, setPokemon] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
-  const itemsPerPage = 1025;
+  const [pokemonTypes, setPokemonTypes] = useState([]);
   const batchSize = 50;
 
   useEffect(() => {
@@ -34,17 +33,13 @@ function App() {
       allDetails = [...allDetails, ...batchDetails];
       setPokemonDetails(allDetails);
       setFilteredPokemon(allDetails);
+
+      const types = new Set();
+      allDetails.forEach(pokemon => {
+        pokemon.types.forEach(type => types.add(type.type.name));
+      });
+      setPokemonTypes(Array.from(types));
     }
-  };
-
-  const totalPages = Math.ceil(filteredPokemon.length / itemsPerPage); // Calculate total pages based on filteredPokemon
-
-  const handleNextPage = () => {
-    setCurrentPage(prev => Math.min(prev + 1, totalPages));
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage(prev => Math.max(prev - 1, 1));
   };
 
   const handleSearch = searchTerm => {
@@ -52,27 +47,37 @@ function App() {
       pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredPokemon(filtered);
-    setCurrentPage(1);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentItems = filteredPokemon.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  const handleTypeFilter = type => {
+    if (type === 'all') {
+      setFilteredPokemon(pokemonDetails);
+    } else {
+      const filtered = pokemonDetails.filter(pokemon =>
+        pokemon.types.some(t => t.type.name === type)
+      );
+      setFilteredPokemon(filtered);
+    }
+  };
 
-  const mappedHomeCards = currentItems.map(pokemon => {
+  const mappedHomeCards = filteredPokemon.map(pokemon => {
     return <HomeCard key={pokemon.id} pokemon={pokemon} />;
   });
 
   return (
-    <>
-      <Search onSearch={handleSearch} />
-      <div className="container">
+    <div className="App">
+      <Search
+        onSearch={handleSearch}
+        onTypeFilter={handleTypeFilter}
+        types={pokemonTypes}
+      />
+
+      <br></br>
+      <br></br>
+      <div className="inner-box">
         <div className="pokemon-list">{mappedHomeCards}</div>
-        <div className="pagination"></div>
       </div>
-    </>
+    </div>
   );
 }
 
