@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import HomeCard from './HomeCard.jsx';
-import Search from './search.jsx';
+import '../App.css';
+import HomeCard from '../Components/HomeCard.jsx';
+import Search from '../Components/search.jsx';
 
-function App() {
+function National() {
   const [pokemon, setPokemon] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
@@ -81,4 +81,4 @@ function App() {
   );
 }
 
-export default App;
+export default National;
