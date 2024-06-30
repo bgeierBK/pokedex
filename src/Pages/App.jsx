@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import NavBar from '../Components/NavBar';
 
 function App() {
   return (
     <div>
-      <h2>National Pokedex</h2>
+      <h2>Pokedex</h2>
+      <NavBar />
       <Outlet />
     </div>
   );
