@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react';
 import '../App.css';
 import HomeCard from '../Components/HomeCard.jsx';
 import Search from '../Components/search.jsx';
+import Modal from '../Components/Modal';
+import PokemonCard from '../Components/PokemonCard';
 
 function Hoenn() {
   const [pokemon, setPokemon] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [pokemonTypes, setPokemonTypes] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPokemonId, setSelectedPokemonId] = useState(null);
   const batchSize = 50;
 
   useEffect(() => {
@@ -59,9 +63,22 @@ function Hoenn() {
     }
   };
 
-  const mappedHomeCards = filteredPokemon.map(pokemon => {
-    return <HomeCard key={pokemon.id} pokemon={pokemon} />;
-  });
+  const handleCardClick = id => {
+    setSelectedPokemonId(id);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedPokemonId(null);
+  };
+
+  const mappedHomeCards = filteredPokemon.map(pokemon => (
+    <div key={pokemon.id} onClick={() => handleCardClick(pokemon.id)}>
+      <HomeCard pokemon={pokemon} />
+    </div>
+  ));
+
   return (
     <div className="App">
       <Search
@@ -75,6 +92,9 @@ function Hoenn() {
       <div className="inner-box">
         <div className="pokemon-list">{mappedHomeCards}</div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        {selectedPokemonId && <PokemonCard id={selectedPokemonId} />}
+      </Modal>
     </div>
   );
 }
