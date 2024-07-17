@@ -60,13 +60,14 @@ body {
 
 .modal-content {
   background: white;
-  padding: 20px;
+  padding: 0;
   border-radius: 8px;
-  width: 80%;
-  max-width: 600px;
-  max-height: 80%;
+  width: 300px;
+  height: 400px;
   overflow-y: auto;
-  position: relative;
+  position: absolute;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
 }
 
 .modal-close {
@@ -77,4 +78,40 @@ body {
   border: none;
   font-size: 16px;
   cursor: pointer;
+}
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400px;
+  width: 300px;
+  background-color: inherit;
+  box-sizing: border-box;
+}
+
+.pokemon-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.pokemon-card h2,
+.pokemon-card-content h3,
+.pokemon-card-content div {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.pokemon-card-content img {
+  align-self: center; /* Center the image horizontally */
+  margin: 10px 0; /* Add vertical margin for spacing */
+  max-height: 150px; /* Ensure the image fits within the card */
+}
+
+.pokemon-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: px solid white;
 }

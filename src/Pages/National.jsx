@@ -91,7 +91,9 @@ function National() {
       <br></br>
       <br></br>
       <div className="inner-box">
-        <div className="pokemon-list">{mappedHomeCards}</div>
+        <div id="pokemon-list" className="pokemon-list">
+          {mappedHomeCards}
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         {selectedPokemonId && <PokemonCard id={selectedPokemonId} />}
