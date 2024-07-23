@@ -65,12 +65,6 @@ function Unova() {
 
   const handleCardClick = id => {
     setSelectedPokemonId(id);
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedPokemonId(null);
   };
 
   const mappedHomeCards = filteredPokemon.map(pokemon => (
@@ -78,6 +72,10 @@ function Unova() {
       <HomeCard pokemon={pokemon} />
     </div>
   ));
+
+  const handleCardClose = () => {
+    setSelectedPokemonId(null);
+  };
 
   return (
     <div className="App">
@@ -90,11 +88,14 @@ function Unova() {
       <br></br>
       <br></br>
       <div className="inner-box">
-        <div className="pokemon-list">{mappedHomeCards}</div>
+        {selectedPokemonId ? (
+          <PokemonCard id={selectedPokemonId} onClose={handleCardClose} />
+        ) : (
+          <div id="pokemon-list" className="pokemon-list">
+            {mappedHomeCards}
+          </div>
+        )}
       </div>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        {selectedPokemonId && <PokemonCard id={selectedPokemonId} />}
-      </Modal>
     </div>
   );
 }

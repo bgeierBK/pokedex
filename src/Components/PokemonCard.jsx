@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 
-function PokemonCard({ id }) {
+function PokemonCard({ id, onClose }) {
   const [pokemon, setPokemon] = useState(null);
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -46,6 +46,9 @@ function PokemonCard({ id }) {
   return (
     <div className="pokemon-card" style={{ backgroundColor }}>
       <div className="pokemon-card-content">
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
         <div>
           <h2>{capitalizeFirstLetter(pokemon.name)}</h2>
         </div>

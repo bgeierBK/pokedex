@@ -9,7 +9,9 @@ body {
 }
 
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemon-list {
@@ -24,9 +26,18 @@ body {
 
 .inner-box {
   background-color: blue;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  margin: 0 auto;
+}
+.pokemon-list,
+.pokemon-card {
+  width: 100%;
+  max-width: 800px;
 }
 
 .home-card {
@@ -114,4 +125,46 @@ body {
   height: 150px;
   border-radius: 50%;
   border: px solid white;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+.close-button {
+  background-color: transparent; /* No background color */
+  border: none;
+  font-size: 1.5em;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #000; /* Set the color to black (or any color you prefer) */
+}
+
+.pokemon-card {
+  position: relative; /* Make sure this is set to allow positioning of child elements */
+  padding: 20px; /* Add some padding to avoid overlap with the content */
+  border-radius: 10px;
+}
+
+.pokemon-card-content {
+  position: relative; /* Ensure this is relative to position the button correctly */
+  border-radius: 10px;
+}
+
+.pokemon-card {
+  position: relative; /* Ensure this is set to allow positioning of child elements */
 }
