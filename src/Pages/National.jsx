@@ -86,17 +86,17 @@ function National() {
         types={pokemonTypes}
       />
 
-      <br></br>
-      <br></br>
-      <div className="inner-box">
-        {selectedPokemonId ? (
+      {selectedPokemonId ? (
+        <div className="common-container">
           <PokemonCard id={selectedPokemonId} onClose={handleCardClose} />
-        ) : (
+        </div>
+      ) : (
+        <div className="common-container">
           <div id="pokemon-list" className="pokemon-list">
             {mappedHomeCards}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

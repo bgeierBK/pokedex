@@ -89,15 +89,14 @@ function Kanto() {
 
       <br></br>
       <br></br>
-      <div className="inner-box">
-        {selectedPokemonId ? (
-          <PokemonCard id={selectedPokemonId} onClose={handleCardClose} />
-        ) : (
-          <div id="pokemon-list" className="pokemon-list">
-            {mappedHomeCards}
-          </div>
-        )}
-      </div>
+
+      {selectedPokemonId ? (
+        <PokemonCard id={selectedPokemonId} onClose={handleCardClose} />
+      ) : (
+        <div id="pokemon-list" className="pokemon-list">
+          {mappedHomeCards}
+        </div>
+      )}
     </div>
   );
 }
